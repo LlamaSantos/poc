@@ -13,4 +13,6 @@ pm2 start npm -- start
 pm2 start json-server -- db.json
 ```
 
-Open a browser to (the site)[http://localhost:8000]
+
+
+Open a browser to [the site](http://localhost:8000)
