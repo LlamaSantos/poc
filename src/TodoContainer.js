@@ -27,14 +27,13 @@ export default bind(
     }
 
     add = () => {
-      const { engine } = this.props;
-      const { dispatcher } = engine;
+      const { dispatch, events } = this.props;
       const text = this.addField.value
 
       if (text) {
         /* Creates the item and triggers a rerender */
-        dispatcher(
-          engine.events.list.do(
+        dispatch(
+          events.list.do(
             i => i.itemCreate,
             { text }
           )

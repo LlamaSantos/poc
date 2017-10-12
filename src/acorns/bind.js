@@ -21,17 +21,17 @@ export default function bind(events, transform, WrappedComponent) {
 
       asyncio.parallel(actions, (err, data) => {
         console.info('bind', 'parallel', err, data)
-        this.setState({ loading: false, ...transform(data.length === 1 ? data[0] : data) })
+        this.setState({
+          loading: false,
+          ...transform(data.length === 1 ? data[0] : data)
+        })
       })
 
       this.subjects.forEach(subject => this.store.subscribe(subject, this.update))
     }
 
     componentWillUnmount() {
-      this.subjects.forEach(subject => {
-        console.info('Unsubscribe', subject)
-        this.store.unsubscribe(subject, this.update)
-      })
+      this.subjects.forEach(subject => this.store.unsubscribe(subject, this.update))
     }
 
     update = (method, data) => {
@@ -43,7 +43,13 @@ export default function bind(events, transform, WrappedComponent) {
 
       console.info('bind', 'render', this.state)
 
-      return createElement(WrappedComponent, { engine: this.engine, events: this.engine.events, ...this.props, ...this.state});
+      return createElement(WrappedComponent, {
+        engine: this.engine,
+        events: this.engine.events,
+        dispatch: this.engine.dispatch,
+        ...this.props,
+        ...this.state
+      });
     }
   }
 

@@ -1,11 +1,7 @@
-import compile from './compile'
+import compile from '../acorns/compile'
 
-const events = {
+export default compile({
   list: [
     'fetch', 'create', 'update', 'delete', 'itemCreate'
   ]
-}
-
-const compiled = compile(events)
-
-export default compiled
+})

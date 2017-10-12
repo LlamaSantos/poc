@@ -10,7 +10,7 @@ npm i
 cd ..
 pm2 start ./utils/proxy.js --watch="./utils/proxy.js"
 pm2 start npm -- start
-pm2 start json-server -- db.json
+pm2 start json-server -- db.json --port 8001
 ```
 
 

@@ -10,7 +10,7 @@ export default function Engine({events, actions, handlers={}}) {
   return {
     events,
     store,
-    dispatcher: Dispatcher(actionInstance),
+    dispatch: Dispatcher(actionInstance),
     actions: actionInstance
   }
 }
