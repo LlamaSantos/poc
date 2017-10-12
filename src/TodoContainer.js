@@ -39,7 +39,7 @@ export default bind(
           )
         )
       }
-  }
+    }
   
     render() {
       const { list, loading } = this.props;
