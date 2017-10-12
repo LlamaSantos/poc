@@ -1,0 +1,21 @@
+{
+  "name": "poc",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "eventemitter2": "^4.1.2",
+    "immutable": "^3.8.1",
+    "proptypes": "^1.1.0",
+    "react": "^16.0.0-rc.3",
+    "react-dom": "^16.0.0-rc.3",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.13",
+    "rxjs": "^5.4.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
