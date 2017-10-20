@@ -1,7 +1,8 @@
-import compile from '../acorns/compile'
-
-export default compile({
+export default {
   list: [
     'fetch', 'create', 'update', 'delete', 'itemCreate'
+  ],
+  account: [
+    'fetch', 'create'
   ]
-})
+}

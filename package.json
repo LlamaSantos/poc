@@ -4,12 +4,12 @@
   "private": true,
   "dependencies": {
     "eventemitter2": "^4.1.2",
-    "immutable": "^3.8.1",
+    "immutable": "^3.8.2",
     "proptypes": "^1.1.0",
-    "react": "^16.0.0-rc.3",
-    "react-dom": "^16.0.0-rc.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.13",
+    "react-scripts": "1.0.14",
     "rxjs": "^5.4.3"
   },
   "scripts": {

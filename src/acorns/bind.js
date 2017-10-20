@@ -9,18 +9,15 @@ export default function bind(events, transform, WrappedComponent) {
       
       this.engine = this.context.engine
       this.store = this.engine.store
-      this.events = events(props, this.engine.events)
+      this.events = (events(props, this.engine.events) || []).filter(i => i)
       this.state = { loading: true }
       this.subjects = this.events.map(i => i.subject)
     }
 
     componentWillMount() {
-      const actions = this.events
-        .filter(i => i.event in this.engine.actions)
-        .map(i => (...args) => this.engine.actions[i.event](i, ...args))
+      const actions = this.events.map(i => (...args) => i.event.handler(i, ...args))
 
       asyncio.parallel(actions, (err, data) => {
-        console.info('bind', 'parallel', err, data)
         this.setState({
           loading: false,
           ...transform(data.length === 1 ? data[0] : data)
@@ -35,18 +32,13 @@ export default function bind(events, transform, WrappedComponent) {
     }
 
     update = (method, data) => {
-      console.info('bind', 'event', method, data)
       this.setState({ loading: false, ...transform(data.length === 1 ? data[0] : data)})
     }
 
     render() {
-
-      console.info('bind', 'render', this.state)
-
       return createElement(WrappedComponent, {
         engine: this.engine,
         events: this.engine.events,
-        dispatch: this.engine.dispatch,
         ...this.props,
         ...this.state
       });

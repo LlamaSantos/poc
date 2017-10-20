@@ -15,10 +15,15 @@ const List = ({ list }) => (
 
 export default bind(
   /* defines parameterized fetching.  fetch is an action, nothing special*/
-  (props, events) => [events.list.do(i => i.fetch, { id: props.id })],
+  (props, events) => [
+    events.subject('list').query('fetch', { id: props.id })
+  ],
 
   /* Prior to rendering this function transforms the data into a format the component expects */
-  data => ({ list: data }),
+  data => {
+    console.info('......', 'data', data)
+    return { list: data }
+  },
   class TodoContainer extends Component {
     static propTypes = {
       id: PropTypes.string,
@@ -27,17 +32,12 @@ export default bind(
     }
 
     add = () => {
-      const { dispatch, events } = this.props;
+      const { events } = this.props;
       const text = this.addField.value
 
       if (text) {
         /* Creates the item and triggers a rerender */
-        dispatch(
-          events.list.do(
-            i => i.itemCreate,
-            { text }
-          )
-        )
+        events.subject('list').execute('itemCreate', { text })
       }
     }
   

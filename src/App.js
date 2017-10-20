@@ -1,19 +1,21 @@
-import React, { Component } from 'react';
-import TodoContainer from './TodoContainer'
-import Provider from './Provider'
 import './App.css';
+import React, { Component } from 'react';
 import acorns from './acorns'
-import events from './common/events'
+import Provider from './Provider'
 import actions from './actions'
+
+import TodoContainer from './TodoContainer'
+import AccountsContainer from './AccountsContainer'
 
 class App extends Component {
   render() {
-    const engine = acorns.Engine({ events, actions })
+    const engine = acorns.Engine({ actions })
 
     return (
       <div className="App">
         <Provider engine={ engine }>
           <TodoContainer id="5" />
+          <AccountsContainer />
         </Provider>
       </div>
     );

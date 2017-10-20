@@ -1,0 +1,50 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import bind from './acorns/bind'
+
+export default bind(
+  (props, events) => [
+    events.subject('accounts').query('fetch')
+  ],
+  data => ({ accounts: data}),
+  class AccountsContainer extends Component {
+    static propTypes = {
+      accounts: PropTypes.array.isRequired
+    }
+
+    static defaultProps = {
+      accounts: []
+    }
+
+    add = () => {
+      console.info('value', this.addInput.value)
+    }
+
+    removed = () => {
+      const { events } = this.props
+
+      events.subject('accounts')
+        .execute('delete', { id: this.remove.value })
+    }
+
+    render() {
+      const { accounts } = this.props
+
+      return <div>
+        <h3>Accounts</h3>
+        <select ref={ i => this.remove = i }>
+          {
+            (accounts || []).map(account => (
+              <option key={ account.id } value={ account.id }>{ account.username }</option>
+            ))
+          }        
+        </select>
+        <button onClick={ this.removed }>Remove</button>
+        <div>
+          <input type="text" ref={ i => this.addInput = i } />
+          <button onClick={ this.add }>Add</button>
+        </div>
+      </div>
+    }
+  }
+)

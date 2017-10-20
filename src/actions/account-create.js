@@ -1,9 +1,9 @@
 import 'whatwg-fetch'
 
 export default (events, store) =>
-  events.subject('list')
-    .handles('itemCreate', (event, done) => {
-      fetch('/api/checklists', {
+  events.subject('accounts')
+    .handles('create', (event, done) => {
+      fetch('/api/accounts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -11,10 +11,7 @@ export default (events, store) =>
         body: JSON.stringify(event.data)
       })
       .then(res => res.json())
-      .then(data => {
-        console.info('action', 'list', 'itemCreate', event.subject, [data])
-        store.merge(event.subject, [data], done)
-      })
+      .then(data => (store.merge(event.subject, [data], done)))
       .catch(err => {
         console.error('action', 'list', 'itemCreate', err)
         done(err)
@@ -22,8 +19,8 @@ export default (events, store) =>
     })
 
 // export default (events, store) => ({
-//   [events.list.key(i => i.itemCreate)]: (event, done) => {
-//     fetch('/api/checklists', {
+//   [events.account.key(i => i.create)]: (event, done) => {
+//     fetch('/api/accounts', {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json'
@@ -31,10 +28,7 @@ export default (events, store) =>
 //       body: JSON.stringify(event.data)
 //     })
 //     .then(res => res.json())
-//     .then(data => {
-//       console.info('action', 'list', 'itemCreate', event.subject, [data])
-//       store.merge(event.subject, [data], done)
-//     })
+//     .then(data => (store.merge(event.subject, [data], done)))
 //     .catch(err => {
 //       console.error('action', 'list', 'itemCreate', err)
 //       done(err)

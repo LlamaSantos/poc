@@ -1,16 +1,11 @@
+import compile from './compile'
 import store from './store'
-import Dispatcher from './dispatcher'
 
-export default function Engine({events, actions, handlers={}}) {
-  for(let key in Object.keys(handlers)) {
-    store.subscribe(key, handlers[key]);
-  }
-
-  const actionInstance = actions(events, store)
+export default function Engine({ actions }) {
+  const events = compile()
+  actions.map(a => a(events, store))
   return {
-    events,
     store,
-    dispatch: Dispatcher(actionInstance),
-    actions: actionInstance
+    events: events
   }
 }

@@ -1,7 +1,11 @@
 import listFetch from './list-get'
 import listAddItem from './list-add-item'
+import accountFetch from './account-get'
+import accountCreate from './account-create'
 
-export default (events, store) => Object.assign({},
-  listFetch(events, store),
-  listAddItem(events, store)
-)
+export default [
+  listFetch,
+  listAddItem,
+  accountFetch,
+  accountCreate
+]
