@@ -33,6 +33,7 @@ export default function bind(events, transform, WrappedComponent) {
 
     update = (method, data) => {
       this.setState({ loading: false, ...transform(data.length === 1 ? data[0] : data)})
+      console.info('update', 'called')
     }
 
     render() {

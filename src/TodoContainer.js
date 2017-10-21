@@ -37,6 +37,8 @@ export default bind(
 
       if (text) {
         /* Creates the item and triggers a rerender */
+        this.addField.value = ""
+        this.addField.focus()
         events.subject('list').execute('itemCreate', { text })
       }
     }

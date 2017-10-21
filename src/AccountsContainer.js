@@ -17,14 +17,19 @@ export default bind(
     }
 
     add = () => {
-      console.info('value', this.addInput.value)
+      const { events } = this.props
+      const username = this.addInput.value
+      this.addInput.value = ""
+
+      events.subject('accounts')
+        .execute('create', { username })
     }
 
     removed = () => {
       const { events } = this.props
 
       events.subject('accounts')
-        .execute('delete', { id: this.remove.value })
+        .execute('remove', { id: this.remove.value })
     }
 
     render() {

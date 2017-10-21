@@ -18,6 +18,11 @@ const set = (key, value, done=noop) => {
   bus.emit(key, 'set', value);
   done(null, value)
 }
+const remove = (key, filter, done=noop) => {
+  let value = filter(get(key))
+  set(key, value)
+  done(null, value)
+}
 const subscribe = (key, handler) => bus.on(key, handler)
 const unsubscribe = (key, handler) => bus.removeListener(key, handler);
 const merge = (key, value, done=noop) => {
@@ -40,6 +45,7 @@ const store = {
   get,
   set,
   merge,
+  remove,
   subscribe,
   unsubscribe
 };
