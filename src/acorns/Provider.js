@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import Engine from './acorns/engine'
+import Engine from './engine'
 
 export default class Provider extends Component {
   constructor(props, context) {
